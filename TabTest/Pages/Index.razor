@@ -1,0 +1,280 @@
+﻿@page "/"
+@using Data;
+@using Data.Models;
+
+<h1>Seafarers Dashboard</h1>
+
+
+<RadzenTabs>
+    <Tabs>
+
+        <RadzenTabsItem Text="New Request">
+            <RadzenGrid @ref="requestsGrid" AllowFiltering="true" AllowPaging="true" PageSize="10" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@newRequests" TItem="RequestRow" RowUpdate="@OnUpdateRequestRow" RowCreate="@OnCreateRequestRow">
+                <Columns>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestId" Title="Request Number" Type="int">
+                        <Template>
+                            @data.RequestId
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="FullName" Title="First Name and Last Name" Type="string">
+                        <Template>
+                            @data.FullName
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="CDN" Title="CDN" Type="string">
+                        <Template>
+                            @data.CDN
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestCertificateType" Title="Request type" Type="string">
+                        <Template>
+                            @data.RequestCertificateType
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="AssignedTo" Title="Assigned to" Type="string">
+                        <Template>
+                            @data.AssignedTo
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ServiceStandard" Title="Service Standard" Type="string">
+                        <Template>
+                            @data.ServiceStandard
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ProcessingPhase" Title="Processing phase" Type="string">
+                        <Template>
+                            @data.ProcessingPhase
+                        </Template>
+                    </RadzenGridColumn>
+
+                </Columns>
+            </RadzenGrid>
+        </RadzenTabsItem>
+        <RadzenTabsItem Text="In Progress">
+            <RadzenGrid @ref="requestsGrid" AllowFiltering="true" AllowPaging="true" PageSize="10" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@requestsInProgress" TItem="RequestRow" RowUpdate="@OnUpdateRequestRow" RowCreate="@OnCreateRequestRow">
+
+                @*<RadzenGrid AllowSorting="true" Data="@submissions" TItem="Submission">*@
+                <Columns>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestId" Title="Request Number" Type="int">
+                        <Template>
+                            @data.RequestId
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="FullName" Title="First Name and Last Name" Type="string">
+                        <Template>
+                            @data.FullName
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="CDN" Title="CDN" Type="string">
+                        <Template>
+                            @data.CDN
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestCertificateType" Title="Request type" Type="string">
+                        <Template>
+                            @data.RequestCertificateType
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="AssignedTo" Title="Assigned to" Type="string">
+                        <Template>
+                            @data.AssignedTo
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ServiceStandard" Title="Service Standard" Type="string">
+                        <Template>
+                            @data.ServiceStandard
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ProcessingPhase" Title="Processing phase" Type="string">
+                        <Template>
+                            @data.ProcessingPhase
+                        </Template>
+                    </RadzenGridColumn>
+
+                </Columns>
+            </RadzenGrid>
+        </RadzenTabsItem>
+
+        <RadzenTabsItem Text="On Hold">
+            <RadzenGrid @ref="requestsGrid" AllowFiltering="true" AllowPaging="true" PageSize="10" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@requestsOnHold" TItem="RequestRow" RowUpdate="@OnUpdateRequestRow" RowCreate="@OnCreateRequestRow">
+
+                @*<RadzenGrid AllowSorting="true" Data="@submissions" TItem="Submission">*@
+                <Columns>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestId" Title="Request Number" Type="int">
+                        <Template>
+                            @data.RequestId
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="FullName" Title="First Name and Last Name" Type="string">
+                        <Template>
+                            @data.FullName
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="CDN" Title="CDN" Type="string">
+                        <Template>
+                            @data.CDN
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestCertificateType" Title="Request type" Type="string">
+                        <Template>
+                            @data.RequestCertificateType
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="AssignedTo" Title="Assigned to" Type="string">
+                        <Template>
+                            @data.AssignedTo
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ServiceStandard" Title="Service Standard" Type="string">
+                        <Template>
+                            @data.ServiceStandard
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ProcessingPhase" Title="Processing phase" Type="string">
+                        <Template>
+                            @data.ProcessingPhase
+                        </Template>
+                    </RadzenGridColumn>
+
+                </Columns>
+            </RadzenGrid>
+        </RadzenTabsItem>
+
+        <RadzenTabsItem Text="Completed">
+            <RadzenGrid @ref="requestsGrid" AllowFiltering="true" AllowPaging="true" PageSize="10" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@requestsCompleted" TItem="RequestRow" RowUpdate="@OnUpdateRequestRow" RowCreate="@OnCreateRequestRow">
+
+                @*<RadzenGrid AllowSorting="true" Data="@submissions" TItem="Submission">*@
+                <Columns>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestId" Title="Request Number" Type="int">
+                        <Template>
+                            @data.RequestId
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="FullName" Title="First Name and Last Name" Type="string">
+                        <Template>
+                            @data.FullName
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="CDN" Title="CDN" Type="string">
+                        <Template>
+                            @data.CDN
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="RequestCertificateType" Title="Request type" Type="string">
+                        <Template>
+                            @data.RequestCertificateType
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="AssignedTo" Title="Assigned to" Type="string">
+                        <Template>
+                            @data.AssignedTo
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ServiceStandard" Title="Service Standard" Type="string">
+                        <Template>
+                            @data.ServiceStandard
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="RequestRow" Context="data" Property="ProcessingPhase" Title="Processing phase" Type="string">
+                        <Template>
+                            @data.ProcessingPhase
+                        </Template>
+                    </RadzenGridColumn>
+
+                </Columns>
+            </RadzenGrid>
+        </RadzenTabsItem>
+    </Tabs>
+</RadzenTabs>
+
+
+@code {
+
+
+    SeafarerdocumentsubmissionContext db = new SeafarerdocumentsubmissionContext();
+
+
+    RadzenGrid<RequestRow> requestsGrid;
+
+    List<RequestRow> requests;
+
+    List<RequestRow> newRequests;
+    List<RequestRow> requestsInProgress;
+    List<RequestRow> requestsOnHold;
+    List<RequestRow> requestsCompleted;
+
+
+
+    protected override void OnInitialized()
+    {
+
+        Submission submission = new Submission();
+
+
+
+        RequestRow rows = new RequestRow();
+        requests = rows.GetAllRequests();
+
+        newRequests = requests.Where(x => x.ProcessingPhase == "New").ToList();
+        requestsInProgress = requests.Where(x => x.ProcessingPhase == "Initial Review").ToList();
+        requestsOnHold = requests.Where(x => x.ProcessingPhase == "On Hold").ToList();
+        requestsCompleted = requests.Where(x => x.ProcessingPhase == "Completed").ToList();
+
+
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+
+
+    void EditRow(Submission order)
+    {
+
+    }
+
+    void OnUpdateRow(Submission order)
+    {
+        db.Update(order);
+
+
+    }
+
+    void SaveRow(Submission order)
+    {
+    }
+
+
+
+
+
+    void InsertRow()
+    {
+
+    }
+
+    void OnCreateRow(Submission order)
+    {
+        db.Add(order);
+
+
+    }
+
+    void OnUpdateRequestRow()
+    {
+
+    }
+
+    void OnCreateRequestRow()
+    {
+
+    }
+
+}
